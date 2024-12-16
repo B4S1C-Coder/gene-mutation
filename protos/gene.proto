@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package gene;
+package mutationprediction;
 
-service geneService {
-    rpc predictLabel (predictLabelRequest) returns (predictLabelReply) {}
+service MutationPredictionService {
+    rpc PredictMutation (PredictMutationRequest) returns (PredictMutationReply) {}
 }
 
-message predictLabelRequest {
-    bytes fileData = 1;
+message PredictMutationRequest {
+    bytes fnaFileData = 1; // Input gene sequence file in binary format
 }
 
-message predictLabelReply {
-    string predictedLabel = 1;
+message PredictMutationReply {
+    repeated float predictions = 1; // Output predictions as probabilities
 }

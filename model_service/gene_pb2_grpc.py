@@ -25,7 +25,7 @@ if _version_not_supported:
     )
 
 
-class geneServiceStub(object):
+class MutationPredictionServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -34,43 +34,43 @@ class geneServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.predictLabel = channel.unary_unary(
-                '/gene.geneService/predictLabel',
-                request_serializer=gene__pb2.predictLabelRequest.SerializeToString,
-                response_deserializer=gene__pb2.predictLabelReply.FromString,
+        self.PredictMutation = channel.unary_unary(
+                '/mutationprediction.MutationPredictionService/PredictMutation',
+                request_serializer=gene__pb2.PredictMutationRequest.SerializeToString,
+                response_deserializer=gene__pb2.PredictMutationReply.FromString,
                 _registered_method=True)
 
 
-class geneServiceServicer(object):
+class MutationPredictionServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def predictLabel(self, request, context):
+    def PredictMutation(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_geneServiceServicer_to_server(servicer, server):
+def add_MutationPredictionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'predictLabel': grpc.unary_unary_rpc_method_handler(
-                    servicer.predictLabel,
-                    request_deserializer=gene__pb2.predictLabelRequest.FromString,
-                    response_serializer=gene__pb2.predictLabelReply.SerializeToString,
+            'PredictMutation': grpc.unary_unary_rpc_method_handler(
+                    servicer.PredictMutation,
+                    request_deserializer=gene__pb2.PredictMutationRequest.FromString,
+                    response_serializer=gene__pb2.PredictMutationReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'gene.geneService', rpc_method_handlers)
+            'mutationprediction.MutationPredictionService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('gene.geneService', rpc_method_handlers)
+    server.add_registered_method_handlers('mutationprediction.MutationPredictionService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class geneService(object):
+class MutationPredictionService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def predictLabel(request,
+    def PredictMutation(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,9 +83,9 @@ class geneService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/gene.geneService/predictLabel',
-            gene__pb2.predictLabelRequest.SerializeToString,
-            gene__pb2.predictLabelReply.FromString,
+            '/mutationprediction.MutationPredictionService/PredictMutation',
+            gene__pb2.PredictMutationRequest.SerializeToString,
+            gene__pb2.PredictMutationReply.FromString,
             options,
             channel_credentials,
             insecure,

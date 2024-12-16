@@ -24,17 +24,17 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ngene.proto\x12\x04gene\"\'\n\x13predictLabelRequest\x12\x10\n\x08\x66ileData\x18\x01 \x01(\x0c\"+\n\x11predictLabelReply\x12\x16\n\x0epredictedLabel\x18\x01 \x01(\t2S\n\x0bgeneService\x12\x44\n\x0cpredictLabel\x12\x19.gene.predictLabelRequest\x1a\x17.gene.predictLabelReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ngene.proto\x12\x12mutationprediction\"-\n\x16PredictMutationRequest\x12\x13\n\x0b\x66naFileData\x18\x01 \x01(\x0c\"+\n\x14PredictMutationReply\x12\x13\n\x0bpredictions\x18\x01 \x03(\x02\x32\x86\x01\n\x19MutationPredictionService\x12i\n\x0fPredictMutation\x12*.mutationprediction.PredictMutationRequest\x1a(.mutationprediction.PredictMutationReply\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'gene_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_PREDICTLABELREQUEST']._serialized_start=20
-  _globals['_PREDICTLABELREQUEST']._serialized_end=59
-  _globals['_PREDICTLABELREPLY']._serialized_start=61
-  _globals['_PREDICTLABELREPLY']._serialized_end=104
-  _globals['_GENESERVICE']._serialized_start=106
-  _globals['_GENESERVICE']._serialized_end=189
+  _globals['_PREDICTMUTATIONREQUEST']._serialized_start=34
+  _globals['_PREDICTMUTATIONREQUEST']._serialized_end=79
+  _globals['_PREDICTMUTATIONREPLY']._serialized_start=81
+  _globals['_PREDICTMUTATIONREPLY']._serialized_end=124
+  _globals['_MUTATIONPREDICTIONSERVICE']._serialized_start=127
+  _globals['_MUTATIONPREDICTIONSERVICE']._serialized_end=261
 # @@protoc_insertion_point(module_scope)
