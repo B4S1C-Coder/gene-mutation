@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package imagenet;
+
+service imagenetService {
+    rpc predictLabel (predictLabelRequest) returns (predictLabelReply) {}
+}
+
+message predictLabelRequest {
+    bytes fileData = 1;
+}
+
+message predictLabelReply {
+    string predictedLabel = 1;
+}
