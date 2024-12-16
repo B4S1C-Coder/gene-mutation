@@ -1,5 +1,5 @@
-// const imagenet_proto = require("../proto/imagenet_proto");
-const imagenet_proto = require("../proto/gene_proto"); // Uncomment above and comment this to revert to TeamClutch example
+const imagenet_proto = require("../proto/imagenet_proto");
+// const imagenet_proto = require("../proto/gene_proto"); // Uncomment above and comment this to revert to TeamClutch example
 // const multer = require("multer");
 
 exports.predictLabel = async (req, res) => {
