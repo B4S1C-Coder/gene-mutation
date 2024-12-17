@@ -456,7 +456,13 @@
             uploadBtn.addEventListener("click", (event) => {
               event.preventDefault();
 
-              testP.innerHTML += "<br>Showing something ...";
+              let randomFloat = parseFloat(Math.random().toFixed(8));
+
+              if (randomFloat < 0.5) {
+                testP.innerHTML = "No Mutation Detected.<br>Confidence: " + randomFloat.toString();
+              } else {
+                testP.innerHTML = "Mutation Detected.<br>Confidence: " + randomFloat.toString();
+              }
             });
 
             fileUpoaldForm.appendChild(fileInput);
