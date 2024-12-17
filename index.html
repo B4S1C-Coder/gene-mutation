@@ -445,6 +445,24 @@
             let testP = document.createElement("p");
             testP.innerHTML =  "No cards have been issued to you as of now.";
 
+            let fileUpoaldForm = document.createElement("form");
+            let fileInput = document.createElement("input");
+            fileInput.setAttribute("type", "file");
+            fileInput.setAttribute("id", "uploadedfile");
+            fileInput.setAttribute("name", "filename");
+
+            let uploadBtn = document.createElement("button");
+            uploadBtn.innerHTML = "Upload .fna";
+            uploadBtn.addEventListener("click", (event) => {
+              event.preventDefault();
+
+              testP.innerHTML += "<br>Showing something ...";
+            });
+
+            fileUpoaldForm.appendChild(fileInput);
+            fileUpoaldForm.innerHTML += "<br>";
+            fileUpoaldForm.appendChild(uploadBtn);
+
             // let moreCardsResponse = fetch(CREDIT_CARD_MANAGEMENT_API_URL, {
             //     method: "GET",
             //     headers: {
@@ -473,6 +491,7 @@
 
             container.appendChild(navbar);
             container.appendChild(email);
+            container.appendChild(fileUpoaldForm);
             container.appendChild(testP);
         }
         createLoginForm();
