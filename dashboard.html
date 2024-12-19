@@ -183,16 +183,40 @@
 
             <!-- Result Section -->
             <div class="widget result" id="result">
-                Gene mutation detected with confidence: <span>86.974%</span>
+                Gene mutation detected with confidence: <span id="confidencenumber">Fetching Results ...</span>
             </div>
         </div>
     </div>
 
     <script>
-        function handleFileUpload() {
+        async function handleFileUpload() {
             const fileInput = document.getElementById('fileInput');
             if (fileInput.files.length > 0) {
                 document.getElementById('result').style.display = 'block';
+
+                let token = localStorage.getItem("token");
+                let file = fileInput.files[0];
+
+                let formData = new FormData();
+                formData.append("file", file);
+
+                let geneRes = await fetch("http://localhost:3000/imagenet/imagenet-label", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "x-api-key": "hFBSVPOkGH8oIBEMEwvRHxxXfNdQjrs7sBesTEoPVxk=_48bc0a559d4c568bfa32f96f2e806c8f"
+                    },
+                    body: formData
+                });
+
+                if (!geneRes.ok) {
+                    alert(`Error while fetching result: ${geneRes.statusText}`);
+                } else {
+                    let data = await geneRes.json();
+                    console.log(data);
+                    document.getElementById("confidencenumber").innerHTML = JSON.stringify(data);
+                }
+
             } else {
                 alert("Please select a file to upload.");
             }

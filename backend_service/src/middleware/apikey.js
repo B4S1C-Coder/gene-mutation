@@ -4,7 +4,7 @@ dotenv.config();
 
 exports.apiKeyMiddleware = async (req, res, next) => {
     try {
-        const providedKey = req.header("x-api-key");
+        const providedKey = req.header("X-Api-Key");
         if (!providedKey) {
             res.status(400).json({ message: "API Key not provided." });
             return;

@@ -195,28 +195,43 @@
         var token;
         var cameraWindowVisible = false;
         var boolAlreadyCreatedLoginForm = false;
-        const ROOT_API_URL = "http://127.0.0.1:8000/";
-        const USER_MANAGEMENT_API_URL = ROOT_API_URL+"user-management/";
+        const ROOT_API_URL = "http://localhost:3000/";
+        const USER_MANAGEMENT_API_URL = ROOT_API_URL+"user/";
         const CREDIT_CARD_MANAGEMENT_API_URL = ROOT_API_URL+"creditcard-management/";
-        function login(uname, pswd) {
+        async function login(uname, pswd) {
             const creds = {
-                username: uname,
+                email: uname,
                 password: pswd
-            }
-            return fetch(USER_MANAGEMENT_API_URL+"login/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": 'Basic ' + btoa(`${creds.username}:${creds.password}`),
-                },
-                body: JSON.stringify(creds),
-            }).then(response => {
+            };
+
+            try {
+                const response = await fetch(USER_MANAGEMENT_API_URL + "login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // "Authorization": 'Basic ' + btoa(`${creds.username}:${creds.password}`),
+                        "X-Api-Key": "hFBSVPOkGH8oIBEMEwvRHxxXfNdQjrs7sBesTEoPVxk=_48bc0a559d4c568bfa32f96f2e806c8f"
+                    },
+                    body: JSON.stringify(creds),
+                });
+
                 if (!response.ok) {
-                    console.error(response.text());
+                    const errorText = await response.text();
+                    console.error(errorText);
+                    return response; // Handle error appropriately
                 }
-                response = response.json().then(responseJSON => window.token = responseJSON.token).then(x => x = userinfo());
-            });
+
+                const responseJSON = await response.json();
+                window.token = responseJSON.token;
+                localStorage.setItem("token", window.token);
+                // userinfo(); // Call userinfo() after setting the token
+                return response; // Return the response for further use if needed
+            } catch (error) {
+                console.error("Error during login:", error);
+                return null; // Handle error appropriately
+            }
         }
+
         function userinfo() {
             console.log("usserinfo:");
             console.log(token);
@@ -306,10 +321,20 @@
             password.setAttribute("id", "loginformpassword");
             let loginBtn = document.createElement("button");
             loginBtn.innerHTML = "Login";
-            loginBtn.addEventListener("click", function (event) {
+            loginBtn.addEventListener("click", async function (event) {
               event.preventDefault();
-              loginWrapper();
-              window.location.href = "dashboard.html";
+              // loginWrapper();
+
+              let uname = document.getElementById("loginformusername").value;
+              let pswd = document.getElementById("loginformpassword").value;
+
+              let loginResult = await login(uname, pswd);
+
+              if (!loginResult.ok) {
+                alert("Incorrect username or passwrd.");
+              } else {
+                window.location.href = "dashboard.html";
+              }
             });
             container.appendChild(heading);
             container.appendChild(pby);
